@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8">
+        <title>멀티미디어 프로젝트</title>
+        <!--<link href="../templated/default.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="../templated/fonts.css" rel="stylesheet" type="text/css" media="all" />
+        -->
+        <link rel="stylesheet" type="text/	css" media="screen" href="../stylesheets/stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <div id="logo">
+                    <h1>Result</h1>
+                </div>
+            </div>
+        </div>
+        <div id="main_content_wrap" class="outer"></div>
+        <div id="copyright" class="container">
+            <p>&copy; KimTaeWhan. All rights reserved. |  Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
+        </div>
+        <script>
+            $.get("../result",function ( pdata){
+                /*
+        var res = "";
+        var list = data.split('\n');
+        for(var i =0;i<20;i++){
+          res += ( "<a href=https://twitter.com/intent/user?user_id=" + list[i] + ">"+ list[i] + "</a><br>" );
+        }
+        document.getElementById("data").innerHTML = res;
+                 */
+                var res = "";
+                var outerkeys = Object.keys(pdata);
+                for(var l = 0; l<outerkeys.length;l++){
+                    data = pdata[outerkeys[l]];
+                    var keys =  Object.keys(data);
+                    console.log(keys);
+                    res += "<br><br>";
+                    res +=  "====================================<br>" + outerkeys[l] + "     ,     confidence : " + data['confidence'] + "<br>====================================<br>";
+                    res += "<br><br>";
+                    res += "<section id=\"main_content\" class=\"inner\">"
+                    for(var k = 0; k<10;k++){
+                        for (var i =0;i<keys.length;i++){
+                            var key = keys[i];
+                            if( key == "confidence"){
+                                continue;
+                            }
+                            var ndata = data[key];
+                            if( ndata["order"] != k ){
+                                continue;
+                            }
+                            res += "<div>name : " + key + "  relationship : " + ndata['relationship'] + " </div><br>";
+                            var imgs = ndata['imgs'];
+                            res += "<div class=\"google-image-layout\" data-google-image-layout data-max-height=\"150\" >" ;
+                            for(var j=0;j<imgs.length;j++){
+                                var src = imgs[j].replace('/none/sehwa','.');
+                                res += "<img style=\"width: 150px;height:150pxmargin-right:1px;margin-bottom:5px;\" src=\"" + src + "\"/>"
+                            }
+                            res += "</div>";
+                            console.log( data[key]);
+                            //                res += ( "<h>" + data[keys[i]].relationship + "hi</h><br>");
+
+                        }
+                    }
+                    res += "</section>";
+                }
+                document.getElementById("main_content_wrap").innerHTML = res;
+            });
+        </script>
+        <script src="../javascripts/imagesloaded.pkgd.min.js"></script>
+        <script src="../src/google-image-layout.js"></script>
+        <script src="../javascripts/main.js"></script>
+    </body>
+</html>

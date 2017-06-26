@@ -1,0 +1,24 @@
+-Server Configuration
+OS: Ubuntu14.04LTS
+Language: Python 2.7
+Server: nodejs 8.1.2
+DB: mongodb3.0.14
+
+
+1.Data crawling
+    1) group image crawling 
+        path: ./crawl_group_image.py
+        command: python crawl_group_image.py
+    2) training image crawling 
+        path: ./crawl_training_image.py
+        command: python crawl_training_image.py
+2.User Image Tagging
+    1) Download opensource - openface 
+        "http://cmusatyalab.github.io/openface/"
+    2) Copy UserTagging.py and multimedia.py to openface/demos/
+        path: ./openface/demos/UserTagging.py
+        command: python ./openface/demos/UserTagging.py infer --multi path/to/classifier path/to/images         
+3.Run server(node.js)
+    1) path: ./server/
+    2) command: node ./server/index.js
+
